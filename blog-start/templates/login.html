@@ -1,0 +1,32 @@
+{% extends 'bootstrap/base.html' %} 
+
+{% block content %}
+{% include 'header.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+<!-- page header -->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Log In</h1>
+            <span class="subheading">Welcome back!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <span class="flash_message">{{ messages[-1] }}</span>
+        {% endif %}
+    {% endwith %}
+    <form method='post' novalidate=True action="{{ url_for('login') }}">
+        {{ wtf.quick_form(form, button_map={'submit':'primary'}) }}
+    </form>
+</div>
+
+{% endblock %}
